@@ -1,3 +1,5 @@
+package org.d3if3024.galerihewan.ui.history
+
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -9,8 +11,6 @@ import org.d3if3024.galerihewan.R
 import org.d3if3024.galerihewan.databinding.FragmentHistoryBinding
 import org.d3if3024.galerihewan.db.Hewandb
 import org.d3if3024.galerihewan.ui.HewanAdapter
-import org.d3if3024.galerihewan.ui.history.HistoryViewModel
-import org.d3if3024.galerihewan.ui.history.HistoryViewModelFactory
 
 class HistoryFragment : Fragment() {
 

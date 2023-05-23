@@ -22,7 +22,6 @@ class HomeFragment : Fragment() {
         ViewModelProvider(this, factory)[HomeViewModel::class.java]
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +34,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val hasil = binding.searchInp.text.toString().uppercase()
         val forImg = binding.searchInp.text.toString().lowercase()
-        val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if4401.assessment")
+        val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if3024.galerihewan")
 
         binding.search.setOnClickListener { cari() }
         binding.detailButton.setOnClickListener {
