@@ -2,49 +2,56 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
-    app:startDestination="@id/homeFragment">
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/navigation_home"
         android:name="org.d3if3024.galerihewan.ui.home.HomeFragment"
-        android:label="Home"
+        android:label="@string/home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            android:id="@+id/action_navigation_home_to_navigation_about"
+            app:destination="@id/navigation_about" />
         <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_navigation_home_to_navigation_detail"
+            app:destination="@id/navigation_detail" />
         <action
-            android:id="@+id/action_homeFragment_to_galeriFragment"
-            app:destination="@id/galeriFragment" />
+            android:id="@+id/action_navigation_home_to_historiFragment"
+            app:destination="@id/historiFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_historyFragment"
-            app:destination="@id/historyFragment" />
+            android:id="@+id/action_navigation_home_to_navigation_galeri"
+            app:destination="@id/navigation_galeri" />
     </fragment>
+
     <fragment
-        android:id="@+id/aboutFragment"
+        android:id="@+id/navigation_galeri"
+        android:name="org.d3if3024.galerihewan.ui.galeri.GaleriFragment"
+        android:label="@string/galeri"
+        tools:layout="@layout/fragment_galeri" />
+
+    <fragment
+        android:id="@+id/navigation_about"
         android:name="org.d3if3024.galerihewan.ui.AboutFragment"
-        android:label="About" />
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+
     <fragment
-        android:id="@+id/detailFragment"
+        android:id="@+id/navigation_detail"
         android:name="org.d3if3024.galerihewan.ui.DetailFragment"
-        android:label="Detail"
-        tools:layout="@layout/fragment_detail" >
+        android:label="@string/title_detail"
+        tools:layout="@layout/fragment_detail">
         <argument
-            android:name="namaDetail"
+            android:name="hasilDetail"
             app:argType="string" />
         <argument
             android:name="imgDetail"
             app:argType="integer" />
     </fragment>
+
     <fragment
-        android:id="@+id/galeriFragment"
-        android:name="org.d3if3024.galerihewan.ui.galeri.GaleriFragment"
-        android:label="GaleriFragment" />
-    <fragment
-        android:id="@+id/historyFragment"
+        android:id="@+id/historiFragment"
         android:name="org.d3if3024.galerihewan.ui.history.HistoryFragment"
-        android:label="HistoryFragment" />
+        android:label="@string/histori"
+        tools:layout="@layout/fragment_history"/>
 </navigation>

@@ -30,5 +30,6 @@ class HomeViewModel(private val db: HewanDao) : ViewModel() {
         }
     }
 
+
     fun getHasilHewan(): LiveData<Hewan?> = hasilHewan
 }

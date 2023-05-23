@@ -17,6 +17,10 @@ class DetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
+
+        var args = DetailFragmentArgs.fromBundle(requireArguments())
+        binding.imageDetail.setImageResource(args.imgDetail)
+        binding.textDetail.text = args.hasilDetail
         return binding.root
     }
 }

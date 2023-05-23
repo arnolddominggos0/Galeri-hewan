@@ -15,4 +15,5 @@ interface HewanDao {
 
     @Query("DELETE FROM hewan")
     fun clearData()
+
 }

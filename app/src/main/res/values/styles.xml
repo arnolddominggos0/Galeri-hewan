@@ -8,7 +8,7 @@
 
     <style name="TextLabel" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">@color/purple_200</item>
     </style>
 </resources>
 

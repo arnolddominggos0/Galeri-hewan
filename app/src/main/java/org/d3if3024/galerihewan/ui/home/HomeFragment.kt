@@ -32,24 +32,26 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val hasil = binding.searchInp.text.toString().uppercase()
-        val forImg = binding.searchInp.text.toString().lowercase()
-        val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if3024.galerihewan")
-
         binding.search.setOnClickListener { cari() }
-        binding.detailButton.setOnClickListener {
-            view.findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment(hasil, imgRes) )
-        }
+        binding.detailButton.setOnClickListener { navigateToDetail() }
         binding.shareButton.setOnClickListener { shareData() }
 
-        viewModel.getHasilHewan().observe(requireActivity(), { showResult(it) })
+        viewModel.getHasilHewan().observe(viewLifecycleOwner, { showResult(it) })
     }
 
     private fun cari() {
         val hasil = binding.searchInp.text.toString()
 
-        viewModel.hasilInput(hasil,"",0)
+        viewModel.hasilInput(hasil, "", 0)
+    }
+
+    private fun navigateToDetail() {
+        val hasil = binding.searchInp.text.toString()
+        val forImg = binding.searchInp.text.toString().lowercase()
+        val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if3024.galerihewan")
+
+        val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetail(hasil, imgRes)
+        findNavController().navigate(action)
     }
 
     private fun shareData() {
@@ -58,7 +60,7 @@ class HomeFragment : Fragment() {
             binding.searchInp.text
         )
         val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.setType ("text/plain").putExtra(Intent.EXTRA_TEXT, message)
+        shareIntent.setType("text/plain").putExtra(Intent.EXTRA_TEXT, message)
         if (shareIntent.resolveActivity(requireActivity().packageManager) != null) {
             startActivity(shareIntent)
         }
@@ -66,7 +68,7 @@ class HomeFragment : Fragment() {
 
     private fun showResult(result: Hewan?) {
         val forImg = binding.searchInp.text.toString().lowercase()
-        val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if4401.assessment")
+        val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if3024.galerihewan")
 
         if (imgRes > 0) {
             binding.result.text = getString(R.string.result, result!!.nama)
@@ -85,9 +87,9 @@ class HomeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.menu_histori -> {
-                findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
+                findNavController().navigate(R.id.action_navigation_home_to_historiFragment)
                 return true
             }
         }
