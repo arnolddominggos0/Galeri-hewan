@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextInputLayout.AdjacentLabel" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@style/TextLabel</item>
+        <item name="boxStrokeColor">@color/white</item>
+        <item name="hintTextColor">@color/grey</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+</resources>
+
