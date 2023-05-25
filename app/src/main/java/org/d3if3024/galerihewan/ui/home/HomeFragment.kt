@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import org.d3if3024.galerihewan.R
 import org.d3if3024.galerihewan.databinding.FragmentHomeBinding
@@ -71,11 +70,9 @@ class HomeFragment : Fragment() {
         val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if3024.galerihewan")
 
         if (imgRes > 0) {
-            binding.result.text = getString(R.string.result, result!!.nama)
             binding.imageView.setImageResource(imgRes)
             binding.buttonGroup.visibility = View.VISIBLE
         } else {
-            binding.result.setText(R.string.kosong)
             binding.imageView.setImageResource(imgRes)
             binding.buttonGroup.visibility = View.INVISIBLE
         }

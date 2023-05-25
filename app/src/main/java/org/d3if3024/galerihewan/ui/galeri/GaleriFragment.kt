@@ -20,9 +20,6 @@ import org.d3if3024.galerihewan.ui.HewanAdapter
 
 class GaleriFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = GaleriFragment()
-    }
 
     private val viewModel: GaleriViewModel by lazy {
         ViewModelProvider(this).get(GaleriViewModel::class.java)
