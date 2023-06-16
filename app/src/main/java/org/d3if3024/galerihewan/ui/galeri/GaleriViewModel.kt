@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.d3if3024.galerihewan.model.Hewan
@@ -23,19 +22,13 @@ class GaleriViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = HewanApi.service.getHewan()
-                val hewanList = parseJsonToHewanList(result)
-                data.postValue(hewanList)
+                data.postValue(result)
                 Log.d("GaleriViewModel", "Success: $result")
             } catch (e: Exception) {
                 Log.d("GaleriViewModel", "Failure: ${e.message}")
                 e.printStackTrace()
             }
         }
-    }
-
-    private fun parseJsonToHewanList(response: String): List<Hewan> {
-        val gson = Gson()
-        return gson.fromJson(response, Array<Hewan>::class.java).toList()
     }
 
     fun getData(): LiveData<List<Hewan>> = data

@@ -25,16 +25,16 @@ class GaleriFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentGaleriBinding
-    private lateinit var hewanAdapter: HewanAdapter
+    private lateinit var myAdapter: HewanAdapter
     private var isLinearLayoutManager = true
     private lateinit var layoutDataStore: SettingDataStore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGaleriBinding.inflate(inflater, container, false)
-        hewanAdapter = HewanAdapter()
+        myAdapter = HewanAdapter()
         with(binding.recyclerView) {
             addItemDecoration(
                 DividerItemDecoration(
@@ -42,7 +42,7 @@ class GaleriFragment : Fragment() {
                     RecyclerView.VERTICAL
                 )
             )
-            adapter = hewanAdapter
+            adapter = myAdapter
             setHasFixedSize(true)
         }
         setHasOptionsMenu(true)
@@ -54,15 +54,15 @@ class GaleriFragment : Fragment() {
 
         layoutDataStore = SettingDataStore(requireContext().dataStore)
         layoutDataStore.preferenceFlow.asLiveData()
-            .observe(viewLifecycleOwner) { value ->
+            .observe(viewLifecycleOwner, { value ->
                 isLinearLayoutManager = value
                 chooseLayout()
                 requireActivity().invalidateOptionsMenu()
-            }
+            })
 
-        viewModel.getData().observe(viewLifecycleOwner) { hewanList ->
-            hewanAdapter.submitGaleriData(hewanList)
-        }
+        viewModel.getData().observe(viewLifecycleOwner, {
+            myAdapter.submitGaleriData(it)
+        })
     }
 
     private fun chooseLayout() {
@@ -75,11 +75,17 @@ class GaleriFragment : Fragment() {
 
     private fun setIcon(menuItem: MenuItem?) {
         if (menuItem == null) return
-        menuItem.icon = ContextCompat.getDrawable(
-            requireContext(),
-            if (isLinearLayoutManager) R.drawable.baseline_grid_view_24
-            else R.drawable.baseline_view_list_24
-        )
+        menuItem.icon = if (isLinearLayoutManager) {
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.baseline_grid_view_24
+            )
+        } else {
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.baseline_view_list_24
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -91,6 +97,7 @@ class GaleriFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_switch_layout -> {
+                // Sets isLinearLayoutManager to the opposite value
                 isLinearLayoutManager = !isLinearLayoutManager
 
                 lifecycleScope.launch {
@@ -99,6 +106,7 @@ class GaleriFragment : Fragment() {
                     )
                 }
 
+                // Sets layout and icon
                 chooseLayout()
                 setIcon(item)
                 true
