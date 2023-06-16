@@ -16,19 +16,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="" />
+        tools:src="@drawable/baseline_broken_image_24" />
 
     <TextView
         android:id="@+id/tvNamaHewan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        tools:text="Sapi" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Rajawali Totol" />
 
     <TextView
         android:id="@+id/tvPengertian"
@@ -49,7 +49,7 @@
         android:layout_marginTop="8dp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvPengertian"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPengertian"
-        tools:text="@string/sumber"/>
+        tools:text="@string/sumber" />
 </androidx.constraintlayout.widget.ConstraintLayout>

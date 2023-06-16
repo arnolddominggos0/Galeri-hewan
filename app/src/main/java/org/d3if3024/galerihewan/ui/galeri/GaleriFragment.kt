@@ -16,6 +16,7 @@ import org.d3if3024.galerihewan.R
 import org.d3if3024.galerihewan.data.SettingDataStore
 import org.d3if3024.galerihewan.data.dataStore
 import org.d3if3024.galerihewan.databinding.FragmentGaleriBinding
+import org.d3if3024.galerihewan.network.HewanApi
 import org.d3if3024.galerihewan.ui.HewanAdapter
 
 class GaleriFragment : Fragment() {
@@ -63,6 +64,24 @@ class GaleriFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner, {
             myAdapter.submitGaleriData(it)
         })
+        viewModel.getStatus().observe(viewLifecycleOwner) {
+            updateProgress(it)
+        }
+    }
+
+    private fun updateProgress(status: HewanApi.ApiStatus) {
+        when (status) {
+            HewanApi.ApiStatus.LOADING -> {
+                binding.progressBar.visibility = View.VISIBLE
+            }
+            HewanApi.ApiStatus.SUCCESS -> {
+                binding.progressBar.visibility = View.GONE
+            }
+            HewanApi.ApiStatus.FAILED -> {
+                binding.progressBar.visibility = View.GONE
+                binding.networkError.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun chooseLayout() {
