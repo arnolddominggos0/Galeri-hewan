@@ -1,6 +1,8 @@
 package org.d3if3024.galerihewan.ui.galeri
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +32,16 @@ class GaleriFragment : Fragment() {
     private var isLinearLayoutManager = true
     private lateinit var layoutDataStore: SettingDataStore
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.i("GaleriFragment", "onAttach dijalankan")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.i("GaleriFragment", "onCreate dijalankan")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,12 +58,14 @@ class GaleriFragment : Fragment() {
             adapter = myAdapter
             setHasFixedSize(true)
         }
+        Log.i("GaleriFragment", "onCreateView dijalankan")
         setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.i("GaleriFragment", "onViewCreated dijalankan")
 
         layoutDataStore = SettingDataStore(requireContext().dataStore)
         layoutDataStore.preferenceFlow.asLiveData()
@@ -67,6 +81,42 @@ class GaleriFragment : Fragment() {
         viewModel.getStatus().observe(viewLifecycleOwner) {
             updateProgress(it)
         }
+        viewModel.scheduleUpdater(requireActivity().application)
+    }
+    override fun onStart() {
+        super.onStart()
+        Log.i("GaleriFragment", "onStart dijalankan")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("GaleriFragment", "onResume dijalankan")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("GaleriFragment", "onPause dijalankan")
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("GaleriFragment", "onStop dijalankan")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i("GaleriFragment", "onDestroyView dijalankan")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("GaleriFragment", "onDestroy dijalankan")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.i("GaleriFragment", "onDetach dijalankan")
     }
 
     private fun updateProgress(status: HewanApi.ApiStatus) {
