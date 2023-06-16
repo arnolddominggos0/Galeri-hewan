@@ -30,7 +30,6 @@ class SettingDataStore(preference_datastore: DataStore<Preferences>) {
             }
         } .
         map { preferences ->
-// On the first run, use LinearLayoutManager by default
             preferences[IS_LINEAR_LAYOUT_MANAGER] ?: true
         }
 

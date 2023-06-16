@@ -20,13 +20,12 @@ import org.d3if3024.galerihewan.ui.HewanAdapter
 
 class GaleriFragment : Fragment() {
 
-
     private val viewModel: GaleriViewModel by lazy {
         ViewModelProvider(this).get(GaleriViewModel::class.java)
     }
 
     private lateinit var binding: FragmentGaleriBinding
-    private lateinit var myAdapter: HewanAdapter
+    private lateinit var hewanAdapter: HewanAdapter
     private var isLinearLayoutManager = true
     private lateinit var layoutDataStore: SettingDataStore
 
@@ -34,8 +33,8 @@ class GaleriFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGaleriBinding.inflate(layoutInflater, container, false)
-        myAdapter = HewanAdapter()
+        binding = FragmentGaleriBinding.inflate(inflater, container, false)
+        hewanAdapter = HewanAdapter()
         with(binding.recyclerView) {
             addItemDecoration(
                 DividerItemDecoration(
@@ -43,7 +42,7 @@ class GaleriFragment : Fragment() {
                     RecyclerView.VERTICAL
                 )
             )
-            adapter = myAdapter
+            adapter = hewanAdapter
             setHasFixedSize(true)
         }
         setHasOptionsMenu(true)
@@ -55,51 +54,43 @@ class GaleriFragment : Fragment() {
 
         layoutDataStore = SettingDataStore(requireContext().dataStore)
         layoutDataStore.preferenceFlow.asLiveData()
-            .observe(viewLifecycleOwner, { value ->
+            .observe(viewLifecycleOwner) { value ->
                 isLinearLayoutManager = value
                 chooseLayout()
-                activity?.invalidateOptionsMenu()
-            })
+                requireActivity().invalidateOptionsMenu()
+            }
 
-        viewModel.getData().observe(viewLifecycleOwner, {
-            myAdapter.submitGaleriData(it)
-        })
+        viewModel.getData().observe(viewLifecycleOwner) { hewanList ->
+            hewanAdapter.submitGaleriData(hewanList)
+        }
     }
 
     private fun chooseLayout() {
-        if (isLinearLayoutManager) {
-            binding.recyclerView.layoutManager =
-                LinearLayoutManager(this.requireContext())
+        binding.recyclerView.layoutManager = if (isLinearLayoutManager) {
+            LinearLayoutManager(requireContext())
         } else {
-            binding.recyclerView.layoutManager =
-                GridLayoutManager(this.requireContext(), 2)
+            GridLayoutManager(requireContext(), 2)
         }
     }
 
     private fun setIcon(menuItem: MenuItem?) {
         if (menuItem == null) return
-        menuItem.icon =
-            if (isLinearLayoutManager)
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.baseline_grid_view_24
-                )
-            else ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.baseline_view_list_24
-            )
+        menuItem.icon = ContextCompat.getDrawable(
+            requireContext(),
+            if (isLinearLayoutManager) R.drawable.baseline_grid_view_24
+            else R.drawable.baseline_view_list_24
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_layout, menu)
-        val layoutButton = menu?.findItem(R.id.action_switch_layout)
+        val layoutButton = menu.findItem(R.id.action_switch_layout)
         setIcon(layoutButton)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_switch_layout -> {
-// Sets isLinearLayoutManager to the opposite value
                 isLinearLayoutManager = !isLinearLayoutManager
 
                 lifecycleScope.launch {
@@ -108,7 +99,6 @@ class GaleriFragment : Fragment() {
                     )
                 }
 
-                // Sets layout and icon
                 chooseLayout()
                 setIcon(item)
                 true

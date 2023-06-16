@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
     private fun cari() {
         val hasil = binding.searchInp.text.toString()
 
-        viewModel.hasilInput(hasil, "", 0)
+        viewModel.hasilInput(hasil, "", "", "")
     }
 
     private fun navigateToDetail() {

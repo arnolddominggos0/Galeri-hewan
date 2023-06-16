@@ -10,39 +10,46 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="88dp"
-        android:layout_height="88dp"
+        android:layout_height="92dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/sapi" />
+        tools:src="" />
 
     <TextView
         android:id="@+id/tvNamaHewan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:text="Sapi" />
 
     <TextView
-        android:id="@+id/latinTextView"
+        android:id="@+id/tvPengertian"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/pengertian_hewan" />
+
+    <TextView
+        android:id="@+id/tvSumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@+id/tvNamaHewan"
-        app:layout_constraintTop_toBottomOf="@+id/guideline"
-        tools:text="Cygnus olor" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvPengertian"
+        app:layout_constraintTop_toBottomOf="@+id/tvPengertian"
+        tools:text="@string/sumber"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

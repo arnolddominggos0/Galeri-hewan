@@ -28,4 +28,6 @@
     <string name="copyright">Cari-Hewan merupakan aplikasi yang memungkinkan user untuk mencari gambar yang sesuai dengan nama hewan.\nAplikasi ini dibuat untuk memenuhi Asesment mobpro 1.\nTemukan kodenya di https://github.com/arnolddominggos0/Galeri-hewan.git\n\nCopyright © 2023 Arnold Sitompul</string>
 
     <string name="action_switch_layout">Ubah Layout</string>
+    <string name="pengertian_hewan">Harimau tergolong dalam hewan mamalia yang memiliki tulang belakang dan berdarah panas. Harimau adalah spesies kucing terbesar dari jenisnya, bahkan melebihi ukuran singa. Selain itu harimau juga termasuk kucing tercepat setelah saudaranya, cheetah. Harimau juga termasuk hewan karnivora, biasanya mereka memburu mangsa dengan ukuran badan agak besar. Seperti rusa, kijang, domba, zebra, babi dan jenis hewan mamalia lainnya. Apabila hewan-hewan tesebut tidak ditemukan harimau, maka mereka mencari hewan dengan ukuran lebih kecil seperti landak.</string>
+    <string name="sumber">https://karyapemuda.com/hewan-karnivora/</string>
 </resources>

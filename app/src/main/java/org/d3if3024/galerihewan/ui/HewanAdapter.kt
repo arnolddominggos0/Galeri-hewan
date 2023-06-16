@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.d3if3024.galerihewan.R
 import org.d3if3024.galerihewan.databinding.ListHewanBinding
 import org.d3if3024.galerihewan.databinding.ListHistoryBinding
@@ -72,16 +73,16 @@ class HewanAdapter :
         }
     }
 
-    fun submitGaleriData(data: List<Hewan>) {
-        val galeriItems = data.map { HewanItem.GaleriItem(it) }
+    fun submitGaleriData(hewanList: List<Hewan>?) {
+        val galeriItems = hewanList?.map { HewanItem.GaleriItem(it) } ?: emptyList()
         submitList(galeriItems)
     }
 
+
     fun submitHistoriData(data: List<HewanEntity?>) {
-        val historiItems = data.map { it?.let { it1 -> HewanItem.HistoriItem(it1) } }
+        val historiItems = data.mapNotNull { it?.let { HewanItem.HistoriItem(it) } }
         submitList(historiItems)
     }
-
 
     inner class GaleriViewHolder(private val binding: ListHewanBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -89,8 +90,12 @@ class HewanAdapter :
         fun bind(hewan: Hewan) {
             with(binding) {
                 tvNamaHewan.text = hewan.nama
-                latinTextView.text = hewan.namaLatin
-                imageView.setImageResource(hewan.imageId)
+                tvPengertian.text = hewan.pengertian
+                tvSumber.text = hewan.sumber
+
+                Glide.with(root.context)
+                    .load(hewan.img)
+                    .into(imageView)
 
                 root.setOnClickListener {
                     val message = root.context.getString(R.string.message, hewan.nama)
@@ -99,6 +104,7 @@ class HewanAdapter :
             }
         }
     }
+
 
     inner class HistoriViewHolder(private val binding: ListHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -109,7 +115,7 @@ class HewanAdapter :
             with(binding) {
                 tanggalTextView.text = dateFormatter.format(Date(hewanEntity.tanggal))
                 tvHewan.text = root.context.getString(R.string.hasil_x, hewanEntity.nama)
-                tvData.text = root.context.getString(R.string.data_x, hewanEntity.latin)
+                tvData.text = root.context.getString(R.string.data_x, hewanEntity.pengertian)
             }
         }
     }

@@ -9,6 +9,7 @@ data class HewanEntity(
     var id: Long = 0L,
     var tanggal: Long = System.currentTimeMillis(),
     var nama: String,
-    var latin: String,
-    var img: Int
+    var pengertian: String,
+    var sumber: String,
+    var img: String
 )
