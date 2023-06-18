@@ -12,12 +12,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/tvGambarHewan"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="20 Mei 2023" />
 
-    <TextView
-        android:id="@+id/tvGambarHewan"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -51,4 +51,5 @@
         app:layout_constraintStart_toStartOf="@+id/tanggalTextView"
         app:layout_constraintTop_toBottomOf="@+id/tvHewan"
         tools:text="Latin: Orygnus" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

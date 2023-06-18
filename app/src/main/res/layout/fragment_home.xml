@@ -25,6 +25,16 @@
             android:hint="@string/search"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/tv_hint"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@+id/search_hint"
+        app:layout_constraintTop_toBottomOf="@+id/search_hint" />
     
 
     <Button

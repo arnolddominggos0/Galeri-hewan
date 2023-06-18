@@ -15,21 +15,20 @@ class HomeViewModel(private val db: HewanDao) : ViewModel() {
 
     private val hasilHewan = MutableLiveData<Hewan?>()
 
-    fun hasilInput(nama: String, pengertian: String, sumber: String, img: String) {
-        hasilHewan.value = Hewan(nama, pengertian, sumber, img)
-
+    fun hasilInput(nama: String, latin: String, img: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val dataHewan = HewanEntity(
                     nama = nama,
-                    pengertian = pengertian,
-                    sumber = sumber,
+                    latin = latin,
                     img = img
                 )
                 db.insert(dataHewan)
             }
+            hasilHewan.value = Hewan(nama, latin, img)
         }
     }
+
 
     fun getHasilHewan(): LiveData<Hewan?> = hasilHewan
 }

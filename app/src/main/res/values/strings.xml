@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Cari Hewan</string>
     <string name="result">Hasil Pencarian: %1$s</string>
-    <string name="kosong">Tidak ada Hewan</string>
     <string name="search">Nama hewan</string>
     <string name="message">%1$s diklik!</string>
 
@@ -35,7 +34,8 @@
     <string name="channel_name">Updater</string>
     <string name="channel_desc">Update data hewan otomatis</string>
 
-    <string name="notif_title">Ada hewan baru!</string>
+    <string name="notif_title">Ada hewan karnivora baru!</string>
     <string name="notif_text">Cek sekarang biar nggak penasaran..</string>
+    <string name="tv_hint">[Hewan yang tersedia : Sapi, bebek, ayam, angsa, domba, kalkun, kambing, kelinci, kerbau, kuda]</string>
 
 </resources>

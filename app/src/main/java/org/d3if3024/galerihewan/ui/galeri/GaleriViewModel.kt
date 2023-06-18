@@ -11,15 +11,15 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.d3if3024.galerihewan.model.Hewan
 import org.d3if3024.galerihewan.network.HewanApi
 import org.d3if3024.galerihewan.network.UpdateWorker
 import java.util.concurrent.TimeUnit
 
 class GaleriViewModel : ViewModel() {
 
-    private val data = MutableLiveData<List<Hewan>>()
+    private val data = MutableLiveData<List<org.d3if3024.galerihewan.model.HewanApiJson>>()
     private val status = MutableLiveData<HewanApi.ApiStatus>()
+
 
     init {
         retrieveData()
@@ -40,7 +40,7 @@ class GaleriViewModel : ViewModel() {
         }
     }
 
-    fun getData(): LiveData<List<Hewan>> = data
+    fun getData(): LiveData<List<org.d3if3024.galerihewan.model.HewanApiJson>> = data
     fun getStatus(): LiveData<HewanApi.ApiStatus> = status
 
     fun scheduleUpdater(app: Application) {

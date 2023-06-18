@@ -1,23 +1,21 @@
 package org.d3if3024.galerihewan.ui.galeri
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import org.d3if3024.galerihewan.MainActivity
 import org.d3if3024.galerihewan.R
@@ -38,16 +36,6 @@ class GaleriFragment : Fragment() {
     private var isLinearLayoutManager = true
     private lateinit var layoutDataStore: SettingDataStore
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.i("GaleriFragment", "onAttach dijalankan")
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.i("GaleriFragment", "onCreate dijalankan")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,14 +52,12 @@ class GaleriFragment : Fragment() {
             adapter = myAdapter
             setHasFixedSize(true)
         }
-        Log.i("GaleriFragment", "onCreateView dijalankan")
         setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i("GaleriFragment", "onViewCreated dijalankan")
 
         layoutDataStore = SettingDataStore(requireContext().dataStore)
         layoutDataStore.preferenceFlow.asLiveData()
@@ -88,41 +74,6 @@ class GaleriFragment : Fragment() {
             updateProgress(it)
         }
         viewModel.scheduleUpdater(requireActivity().application)
-    }
-    override fun onStart() {
-        super.onStart()
-        Log.i("GaleriFragment", "onStart dijalankan")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.i("GaleriFragment", "onResume dijalankan")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.i("GaleriFragment", "onPause dijalankan")
-
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.i("GaleriFragment", "onStop dijalankan")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.i("GaleriFragment", "onDestroyView dijalankan")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i("GaleriFragment", "onDestroy dijalankan")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.i("GaleriFragment", "onDetach dijalankan")
     }
 
     private fun updateProgress(status: HewanApi.ApiStatus) {
@@ -151,27 +102,20 @@ class GaleriFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setIcon(menuItem: MenuItem?) {
         if (menuItem == null) return
-        menuItem.icon = if (isLinearLayoutManager) {
-            ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.baseline_grid_view_24
-            )
-        } else {
-            ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.baseline_view_list_24
-            )
-        }
+        menuItem.iconTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_layout, menu)
         val layoutButton = menu.findItem(R.id.action_switch_layout)
         setIcon(layoutButton)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_switch_layout -> {
@@ -192,6 +136,7 @@ class GaleriFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun requestNotificationPermission() {
         if (ActivityCompat.checkSelfPermission(

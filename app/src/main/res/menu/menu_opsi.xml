@@ -6,5 +6,6 @@
         android:id="@+id/menu_histori"
         android:icon="@drawable/baseline_history_24"
         android:title="@string/histori"
+        android:titleTextAppearance="@style/MenuTextAppearance"
         app:showAsAction="ifRoom" />
 </menu>

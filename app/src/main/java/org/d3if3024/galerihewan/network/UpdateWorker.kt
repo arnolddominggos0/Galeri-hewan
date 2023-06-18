@@ -1,3 +1,4 @@
+// UpdateWorker.kt
 package org.d3if3024.galerihewan.network
 
 import android.Manifest
@@ -19,10 +20,12 @@ class UpdateWorker(
     context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
+
     companion object {
         const val WORK_NAME = "updater"
         private const val NOTIFICATION_ID = 44
     }
+
     override suspend fun doWork(): Result {
         if (ActivityCompat.checkSelfPermission(
                 applicationContext,
@@ -32,16 +35,15 @@ class UpdateWorker(
             Log.e("Worker", "Tidak diberikan izin notifikasi")
             return Result.failure()
         }
-        val builder = NotificationCompat.Builder(applicationContext,
-            MainActivity.CHANNEL_ID)
+
+        val builder = NotificationCompat.Builder(applicationContext, MainActivity.CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher_round)
-            .setContentTitle(applicationContext.getString(
-                R.string.notif_title))
-            .setContentText(applicationContext.getString(
-                R.string.notif_text))
+            .setContentTitle(applicationContext.getString(R.string.notif_title))
+            .setContentText(applicationContext.getString(R.string.notif_text))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(getPendingIntent(applicationContext))
             .setAutoCancel(true)
+
         val manager = NotificationManagerCompat.from(applicationContext)
         manager.notify(NOTIFICATION_ID, builder.build())
 
@@ -50,13 +52,16 @@ class UpdateWorker(
     }
 
     private fun getPendingIntent(context: Context): PendingIntent {
-        val intent = Intent(context, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            putExtra("FRAGMENT_TO_LOAD", "GALERI_FRAGMENT")
+        }
+
         var flags = PendingIntent.FLAG_UPDATE_CURRENT
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             flags = flags or PendingIntent.FLAG_IMMUTABLE
         }
+
         return PendingIntent.getActivity(context, 0, intent, flags)
     }
 }

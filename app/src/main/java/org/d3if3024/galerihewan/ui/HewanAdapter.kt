@@ -11,7 +11,7 @@ import org.d3if3024.galerihewan.R
 import org.d3if3024.galerihewan.databinding.ListHewanBinding
 import org.d3if3024.galerihewan.databinding.ListHistoryBinding
 import org.d3if3024.galerihewan.db.HewanEntity
-import org.d3if3024.galerihewan.model.Hewan
+import org.d3if3024.galerihewan.model.HewanApiJson
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,7 +31,7 @@ class HewanAdapter :
     }
 
     sealed class HewanItem {
-        data class GaleriItem(val hewan: Hewan) : HewanItem()
+        data class GaleriItem(val hewan: HewanApiJson) : HewanItem()
         data class HistoriItem(val hewanEntity: HewanEntity) : HewanItem()
     }
 
@@ -73,7 +73,8 @@ class HewanAdapter :
         }
     }
 
-    fun submitGaleriData(data: List<Hewan>) {
+
+    fun submitGaleriData(data: List<HewanApiJson>) {
         val galeriItems = data.map { HewanItem.GaleriItem(it) }
         submitList(galeriItems)
     }
@@ -87,7 +88,7 @@ class HewanAdapter :
     inner class GaleriViewHolder(private val binding: ListHewanBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(hewan: Hewan) {
+        fun bind(hewan: HewanApiJson) {
             with(binding) {
                 tvNamaHewan.text = hewan.nama
                 tvPengertian.text = hewan.pengertian
@@ -115,8 +116,12 @@ class HewanAdapter :
             with(binding) {
                 tanggalTextView.text = dateFormatter.format(Date(hewanEntity.tanggal))
                 tvHewan.text = root.context.getString(R.string.hasil_x, hewanEntity.nama)
-                tvData.text = root.context.getString(R.string.data_x, hewanEntity.pengertian)
+                tvData.text = root.context.getString(R.string.data_x, hewanEntity.latin)
+                Glide.with(root.context)
+                    .load(hewanEntity.img)
+                    .into(imageView)
             }
         }
     }
 }
+
