@@ -19,7 +19,8 @@ class DetailFragment : Fragment() {
 
         var args = DetailFragmentArgs.fromBundle(requireArguments())
         binding.imageDetail.setImageResource(args.imgDetail)
-        binding.textDetail.text = args.hasilDetail
+        binding.textDetailNama.text = args.hasilDetail
+        binding.textDetailLatin.text = args.latinDetail
         return binding.root
     }
 }

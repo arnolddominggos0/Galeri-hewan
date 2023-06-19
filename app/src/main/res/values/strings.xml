@@ -12,6 +12,8 @@
     <string name="title_detail">Detail</string>
     <string name="share">Share</string>
     <string name="bagikan_template">Hewan: %1$s</string>
+    <string name="tv_hint">[Hewan yang tersedia : Sapi, bebek, ayam, angsa, domba, kalkun, kambing, kelinci, kerbau, kuda]</string>
+    <string name="latin_detail">Latin: %1$s</string>
 
     <string name="belum_ada_data">Belum ada data</string>
     <string name="histori">Histori</string>
@@ -36,6 +38,6 @@
 
     <string name="notif_title">Ada hewan karnivora baru!</string>
     <string name="notif_text">Cek sekarang biar nggak penasaran..</string>
-    <string name="tv_hint">[Hewan yang tersedia : Sapi, bebek, ayam, angsa, domba, kalkun, kambing, kelinci, kerbau, kuda]</string>
+
 
 </resources>

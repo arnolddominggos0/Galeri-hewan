@@ -25,6 +25,7 @@ class GaleriViewModel : ViewModel() {
         retrieveData()
     }
 
+
     private fun retrieveData() {
         viewModelScope.launch(Dispatchers.IO) {
             status.postValue(HewanApi.ApiStatus.LOADING)

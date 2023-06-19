@@ -47,6 +47,9 @@
         <argument
             android:name="imgDetail"
             app:argType="integer" />
+        <argument
+            android:name="latinDetail"
+            app:argType="string" />
     </fragment>
 
     <fragment

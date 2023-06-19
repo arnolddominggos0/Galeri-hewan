@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import org.d3if3024.galerihewan.R
 import org.d3if3024.galerihewan.databinding.FragmentHomeBinding
 import org.d3if3024.galerihewan.db.Hewandb
+import org.d3if3024.galerihewan.model.Hewan
 
 class HomeFragment : Fragment() {
 
@@ -78,16 +79,20 @@ class HomeFragment : Fragment() {
 
     private fun cari() {
         val nama = binding.searchInp.text.toString()
-        val latin = binding.searchInp.text.toString()
         val forImg = binding.searchInp.text.toString().lowercase()
         val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if3024.galerihewan")
 
         if (isValidInput(nama)) {
-            viewModel.hasilInput(nama, latin, imgRes)
+            val hewan = initData().find { it.nama.equals(nama, ignoreCase = true) }
+            val latin = hewan?.namaLatin
+            if (latin != null) {
+                viewModel.hasilInput(nama, latin, imgRes)
+            }
         } else {
             Toast.makeText(requireContext(), "Input tidak valid", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun isValidInput(input: String): Boolean {
         return input.matches(Regex("[a-zA-Z ]+"))
@@ -97,10 +102,14 @@ class HomeFragment : Fragment() {
         val hasil = binding.searchInp.text.toString()
         val forImg = binding.searchInp.text.toString().lowercase()
         val imgRes = resources.getIdentifier(forImg, "drawable", "org.d3if3024.galerihewan")
-
-        val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetail(hasil, imgRes)
-        findNavController().navigate(action)
+        val hewan = initData().find { it.nama.equals(hasil, ignoreCase = true) }
+        val latinDetail = hewan?.namaLatin
+        if (latinDetail != null) {
+            val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetail(hasil, imgRes, latinDetail)
+            findNavController().navigate(action)
+        }
     }
+
 
     private fun shareData() {
         val message = getString(
@@ -128,4 +137,20 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), "Tidak ada Hewan", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun initData(): List<Hewan> {
+        return listOf(
+            Hewan("Angsa", "Cygnus olor", R.drawable.angsa),
+            Hewan("Ayam", "Gallus gallus", R.drawable.ayam),
+            Hewan("Bebek", "Cairina moschata", R.drawable.bebek),
+            Hewan("Domba", "Ovis ammon", R.drawable.domba),
+            Hewan("Kalkun", "Meleagris gallopavo", R.drawable.kalkun),
+            Hewan("Kambing", "Capricornis sumatrensis", R.drawable.kambing),
+            Hewan("Kelinci", "Oryctolagus cuniculus", R.drawable.kelinci),
+            Hewan("Kerbau", "Bubalus bubalis", R.drawable.kerbau),
+            Hewan("Kuda", "Equus caballus", R.drawable.kuda),
+            Hewan("Sapi", "Bos taurus", R.drawable.sapi),
+        )
+    }
 }
+

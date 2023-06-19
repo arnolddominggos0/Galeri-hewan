@@ -30,6 +30,9 @@ class GaleriFragment : Fragment() {
     private val viewModel: GaleriViewModel by lazy {
         ViewModelProvider(this).get(GaleriViewModel::class.java)
     }
+    private val _viewModel: GaleriViewModel by lazy {
+        ViewModelProvider(this).get(GaleriViewModel::class.java)
+    }
 
     private lateinit var binding: FragmentGaleriBinding
     private lateinit var myAdapter: HewanAdapter
